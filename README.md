@@ -8,6 +8,7 @@ generated from comments with minimal `@tags` and a template markdown file.
 
 ## Example
 
+**api/users.js**
 ```js
 // @api GET /users
 // Returns a list of all the users @json {
@@ -19,6 +20,7 @@ generated from comments with minimal `@tags` and a template markdown file.
 app.get('/users', ...)
 ```
 
+**misc/api-template.md**
 ```md
 ## Users
 
