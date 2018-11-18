@@ -65,9 +65,11 @@ Example of a JSON block @json {
   "key": "value"
 }
 Text following the JSON block
+```
 
--- Expands into (with triple `):
+Expands into (with triple backticks)
 
+```md
 Example of a JSON block
 ``json
 {
