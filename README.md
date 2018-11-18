@@ -16,7 +16,6 @@ generated from comments with minimal `@tags` and a template markdown file.
 //     "name": "Some user"
 //   }, ...],
 // }
-// 
 app.get('/users', ...)
 ```
 
