@@ -4,7 +4,7 @@ const ArgumentParser = require('argparse').ArgumentParser
 const main = require('./main')
 
 const parser = new ArgumentParser({
-  version: '0.2.2',
+  version: '0.2.3',
   addHelp: true,
   description: 'Lightweight API documentation generator',
 })
@@ -28,6 +28,11 @@ parser.addArgument('--outdir', {
 parser.addArgument('--pattern', {
   help: 'Regex pattern the files must match',
   defaultValue: '\.js$',
+})
+
+parser.addArgument('--endpoints', {
+  help: 'A JSON file containing a list of endpoints that must be defined',
+  metavar: 'endpoints.json',
 })
 
 parser.addArgument('dir', {

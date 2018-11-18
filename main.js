@@ -8,7 +8,6 @@ const mkdirp = promisify(require('mkdirp'))
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
 
-
 module.exports = (args) => {
   let endpoints = []
 
@@ -19,8 +18,12 @@ module.exports = (args) => {
     let activeEndpoint = null
     let lineIndex = 0
 
+    let error = null
+
     function doError(message) {
-      throw `Line ${lineIndex}: ${message}`
+      const err = `Line ${lineIndex}: ${message}`
+      console.error(filename, err)
+      error = error || err
     }
 
     for (const line of lines) {
@@ -67,6 +70,8 @@ module.exports = (args) => {
     if (jsonStartLine >= 0) {
       doError(`Unclosed JSON block at line ${jsonStartLine}`)
     }
+
+    if (error) throw error
   }
 
   const outputDir = args.outdir || path.dirname(args.o)
@@ -179,5 +184,21 @@ module.exports = (args) => {
   }).then((lines) => {
     const str = lines.join('\n')
     return writeFile(args.o, str)
+  }).then(() => {
+    if (!args.endpoints) return
+
+    const endpointSet = new Set(endpoints.map(e => `${e.method} ${e.url}`))
+    return readFile(args.endpoints, { encoding: 'utf-8' }).then((file) => {
+      const refEndpoints = JSON.parse(file)
+      let numNotFound = 0
+      for (const ep of refEndpoints) {
+        if (!endpointSet.has(ep)) {
+          console.error('Undocumented endpoint: ', ep)
+          numNotFound++
+        }
+      }
+      if (numNotFound > 0)
+        throw `Endpoints not documented: ${numNotFound}`
+    })
   })
 }
