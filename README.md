@@ -77,3 +77,19 @@ Example of a JSON block
 Text following the JSON block
 ```
 
+## Template syntax
+
+The template is mostly a standard Markdown file, endpoints are plugged into
+`@api /path/to/endpoint (method)` macros. If the `method` is omitted the tag
+will expand into all the methods of an path.
+
+```md
+# API documentation
+
+## Some endpoint group
+
+This group of endpoints have some common behaviors described here.
+
+@api /path/to/endpoint
+```
+
