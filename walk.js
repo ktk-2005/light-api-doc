@@ -14,7 +14,7 @@ function walkLevel(rootDir, callback) {
         if (st.isDirectory()) {
           return walkLevel(dir, callback)
         } else if (st.isFile()) {
-          return callback(dir).catch((err) => {
+          return Promise.resolve(callback(dir)).catch((err) => {
             return Promise.reject({ file: dir, error: err })
           })
         }

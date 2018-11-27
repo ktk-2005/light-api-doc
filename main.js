@@ -175,8 +175,12 @@ module.exports = (args) => {
     if (!dir.match(pattern)) return
     return readFile(dir, { encoding: 'utf-8' }).then(file => processFile(file, dir))
   }).catch((error) => {
-    console.error('Failed to process file:', error.file)
-    throw error.error
+    if (error.file) {
+      console.error('Failed to process file:', error.file)
+      throw error.error
+    } else {
+      throw error
+    }
   }).then(() => {
     return readFile(args.t, { encoding: 'utf-8' }).then(file => processTemplate(file))
   }).then((lines) => {

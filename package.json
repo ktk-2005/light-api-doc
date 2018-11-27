@@ -1,6 +1,6 @@
 {
   "name": "light-api-doc",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Lightweight API documentation generator",
   "main": "cli.js",
   "scripts": {
