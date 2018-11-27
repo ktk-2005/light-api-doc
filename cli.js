@@ -4,7 +4,7 @@ const ArgumentParser = require('argparse').ArgumentParser
 const main = require('./main')
 
 const parser = new ArgumentParser({
-  version: '0.2.4',
+  version: '0.2.5',
   addHelp: true,
   description: 'Lightweight API documentation generator',
 })

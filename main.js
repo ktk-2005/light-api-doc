@@ -57,7 +57,7 @@ module.exports = (args) => {
           activeEndpoint.lines.push('```json')
           activeEndpoint.lines.push('{')
           jsonStartLine = lineIndex
-        } else if (comment.match(/}\s*/)) {
+        } else if (comment.match(/^}\s*/) && jsonStartLine >= 0) {
           jsonStartLine = -1
           activeEndpoint.lines.push('}')
           activeEndpoint.lines.push('```')
